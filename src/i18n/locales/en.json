@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "docs": "Documentation",
+    "showcase": "Showcase"
+  },
+  "common": {
+    "readMore": "Read more",
+    "backToHome": "Back to home",
+    "pageNotFound": "Page Not Found",
+    "pageNotFoundDesc": "The page you're looking for doesn't exist or has been moved.",
+    "darkMode": "Dark mode",
+    "lightMode": "Light mode",
+    "language": "Language",
+    "search": "Search",
+    "allRightsReserved": "All rights reserved."
+  },
+  "home": {
+    "hero": {
+      "title": "Astro Master Template",
+      "subtitle": "Production-ready template with multi-framework Islands Architecture, Content Collections, i18n, and Tailwind design system.",
+      "cta": "Get Started",
+      "secondary": "View on GitHub"
+    },
+    "features": {
+      "title": "Features",
+      "islands": {
+        "title": "Islands Architecture",
+        "description": "Ship zero JavaScript by default. Interactive islands hydrate independently for maximum performance."
+      },
+      "multiFramework": {
+        "title": "Multi-Framework",
+        "description": "Use React, Vue, Svelte, Solid, and Preact side by side in the same project."
+      },
+      "contentCollections": {
+        "title": "Content Collections",
+        "description": "Type-safe Markdown content with Zod schemas for blogs, documentation, and more."
+      },
+      "i18n": {
+        "title": "Internationalization",
+        "description": "Built-in multi-language support with JSON-based translations and dynamic locale switching."
+      },
+      "designSystem": {
+        "title": "Design System",
+        "description": "Tailwind CSS design tokens with dark mode, responsive typography, and reusable UI components."
+      },
+      "dx": {
+        "title": "Developer Experience",
+        "description": "ESLint, Prettier, Husky, Conventional Commits, and CI/CD workflows out of the box."
+      }
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Latest articles and tutorials",
+    "publishedOn": "Published on",
+    "by": "by",
+    "minRead": "min read",
+    "tags": "Tags"
+  },
+  "docs": {
+    "title": "Documentation",
+    "description": "Guides and references for the Astro Master Template",
+    "onThisPage": "On This Page",
+    "editOnGitHub": "Edit on GitHub"
+  }
+}

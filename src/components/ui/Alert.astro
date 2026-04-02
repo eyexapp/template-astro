@@ -1,0 +1,33 @@
+---
+import { cn } from '@lib/utils';
+
+interface Props {
+  variant?: 'info' | 'success' | 'warning' | 'error';
+  class?: string;
+}
+
+const { variant = 'info', class: className } = Astro.props;
+
+const variants = {
+  info: 'border-[var(--color-primary-300)] bg-[var(--color-primary-50)] text-[var(--color-primary-800)] dark:border-[var(--color-primary-700)] dark:bg-[var(--color-primary-900)]/30 dark:text-[var(--color-primary-200)]',
+  success: 'border-emerald-300 bg-emerald-50 text-emerald-800 dark:border-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-200',
+  warning: 'border-amber-300 bg-amber-50 text-amber-800 dark:border-amber-700 dark:bg-amber-900/30 dark:text-amber-200',
+  error: 'border-red-300 bg-red-50 text-red-800 dark:border-red-700 dark:bg-red-900/30 dark:text-red-200',
+};
+
+const icons = {
+  info: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  success: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+  warning: 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z',
+  error: 'M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z',
+};
+---
+
+<div class={cn('flex items-start gap-3 rounded-lg border p-4', variants[variant], className)} role="alert">
+  <svg class="h-5 w-5 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d={icons[variant]} />
+  </svg>
+  <div class="text-sm">
+    <slot />
+  </div>
+</div>

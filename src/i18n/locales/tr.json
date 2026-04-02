@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "blog": "Blog",
+    "docs": "Dokümantasyon",
+    "showcase": "Vitrin"
+  },
+  "common": {
+    "readMore": "Devamını oku",
+    "backToHome": "Ana sayfaya dön",
+    "pageNotFound": "Sayfa Bulunamadı",
+    "pageNotFoundDesc": "Aradığınız sayfa bulunamadı veya taşınmış olabilir.",
+    "darkMode": "Karanlık mod",
+    "lightMode": "Aydınlık mod",
+    "language": "Dil",
+    "search": "Arama",
+    "allRightsReserved": "Tüm hakları saklıdır."
+  },
+  "home": {
+    "hero": {
+      "title": "Astro Master Template",
+      "subtitle": "Çoklu framework Islands Architecture, Content Collections, i18n ve Tailwind tasarım sistemi ile üretime hazır şablon.",
+      "cta": "Başlarken",
+      "secondary": "GitHub'da Görüntüle"
+    },
+    "features": {
+      "title": "Özellikler",
+      "islands": {
+        "title": "Islands Architecture",
+        "description": "Varsayılan olarak sıfır JavaScript gönderir. İnteraktif adacıklar bağımsız olarak yüklenir."
+      },
+      "multiFramework": {
+        "title": "Çoklu Framework",
+        "description": "React, Vue, Svelte, Solid ve Preact'ı aynı projede yan yana kullanın."
+      },
+      "contentCollections": {
+        "title": "İçerik Koleksiyonları",
+        "description": "Blog, dokümantasyon ve daha fazlası için Zod şemalarıyla tip güvenli Markdown içerik."
+      },
+      "i18n": {
+        "title": "Çoklu Dil Desteği",
+        "description": "JSON tabanlı çeviriler ve dinamik dil değiştirme ile yerleşik çoklu dil desteği."
+      },
+      "designSystem": {
+        "title": "Tasarım Sistemi",
+        "description": "Karanlık mod, duyarlı tipografi ve yeniden kullanılabilir UI bileşenleriyle Tailwind CSS tasarım token'ları."
+      },
+      "dx": {
+        "title": "Geliştirici Deneyimi",
+        "description": "ESLint, Prettier, Husky, Conventional Commits ve CI/CD iş akışları kutudan çıkar çıkmaz hazır."
+      }
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "En son makaleler ve eğitimler",
+    "publishedOn": "Yayınlanma tarihi",
+    "by": "yazar",
+    "minRead": "dk okuma",
+    "tags": "Etiketler"
+  },
+  "docs": {
+    "title": "Dokümantasyon",
+    "description": "Astro Master Template için kılavuzlar ve referanslar",
+    "onThisPage": "Bu Sayfada",
+    "editOnGitHub": "GitHub'da Düzenle"
+  }
+}

@@ -1,0 +1,74 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Section from '@components/ui/Section.astro';
+import Badge from '@components/ui/Badge.astro';
+import Alert from '@components/ui/Alert.astro';
+import { PreactCounter } from '@components/preact/PreactCounter';
+import * as react from '@components/react/ReactCounter';
+import SolidCounter from '@components/solid/SolidCounter';
+import SvelteCounter from '@components/svelte/SvelteCounter.svelte';
+import VueCounter from '@components/vue/VueCounter.vue';
+---
+
+<BaseLayout seo={{ title: 'Showcase', description: 'Multi-framework counter demo with shared Nano Store state' }}>
+  <Section>
+    <div class="text-center mb-12">
+      <Badge variant="primary">Nano Stores Demo</Badge>
+      <h1 class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+        Framework Showcase
+      </h1>
+      <p class="mt-4 text-[var(--color-text-light)] dark:text-[var(--color-text-light-dark)] max-w-2xl mx-auto">
+        All five counters below share the <strong>same Nano Store</strong>. Clicking any button
+        updates the count across all frameworks simultaneously.
+      </p>
+    </div>
+
+    <Alert variant="info" class="mb-10 max-w-2xl mx-auto">
+      <strong>How it works:</strong> Each framework uses its own Nano Stores adapter
+      (<code>@nanostores/react</code>, <code>@nanostores/vue</code>, etc.) to subscribe to
+      the same <code>$count</code> atom. State changes propagate instantly across all islands.
+    </Alert>
+
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+      <!-- React -->
+      <div class="rounded-xl border border-[var(--color-border)] p-6 text-center dark:border-[var(--color-border-dark)]">
+        <Badge variant="primary">React</Badge>
+        <react.Counter client:visible>
+          <p class="text-sm text-[var(--color-muted)] mt-1">React 18 + useStore</p>
+        </react.Counter>
+      </div>
+
+      <!-- Preact -->
+      <div class="rounded-xl border border-[var(--color-border)] p-6 text-center dark:border-[var(--color-border-dark)]">
+        <Badge variant="success">Preact</Badge>
+        <PreactCounter client:visible>
+          <p class="text-sm text-[var(--color-muted)] mt-1">Preact + useStore</p>
+        </PreactCounter>
+      </div>
+
+      <!-- Solid -->
+      <div class="rounded-xl border border-[var(--color-border)] p-6 text-center dark:border-[var(--color-border-dark)]">
+        <Badge variant="warning">Solid</Badge>
+        <SolidCounter client:visible>
+          <p class="text-sm text-[var(--color-muted)] mt-1">SolidJS + useStore</p>
+        </SolidCounter>
+      </div>
+
+      <!-- Vue -->
+      <div class="rounded-xl border border-[var(--color-border)] p-6 text-center dark:border-[var(--color-border-dark)]">
+        <Badge variant="danger">Vue</Badge>
+        <VueCounter client:visible>
+          <p class="text-sm text-[var(--color-muted)] mt-1">Vue 3 + useStore</p>
+        </VueCounter>
+      </div>
+
+      <!-- Svelte -->
+      <div class="rounded-xl border border-[var(--color-border)] p-6 text-center dark:border-[var(--color-border-dark)]">
+        <Badge>Svelte</Badge>
+        <SvelteCounter client:visible>
+          <p class="text-sm text-[var(--color-muted)] mt-1">Svelte 5 + $count</p>
+        </SvelteCounter>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

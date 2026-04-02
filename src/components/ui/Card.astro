@@ -1,0 +1,30 @@
+---
+import { cn } from '@lib/utils';
+
+interface Props {
+  href?: string;
+  class?: string;
+  padding?: boolean;
+}
+
+const { href, class: className, padding = true } = Astro.props;
+
+const baseStyles = cn(
+  'rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm transition-all duration-200',
+  'dark:border-[var(--color-border-dark)] dark:bg-[var(--color-surface-alt-dark)]',
+  href && 'hover:shadow-md hover:border-[var(--color-primary-300)] dark:hover:border-[var(--color-primary-700)]',
+  padding && 'p-6',
+  className,
+);
+
+---
+
+{href ? (
+  <a href={href} class={baseStyles}>
+    <slot />
+  </a>
+) : (
+  <div class={baseStyles}>
+    <slot />
+  </div>
+)}

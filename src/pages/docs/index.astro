@@ -1,0 +1,50 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Card from '@components/ui/Card.astro';
+import Section from '@components/ui/Section.astro';
+import { getCollection } from 'astro:content';
+import { getLocaleFromUrl, useTranslations } from '@i18n/index';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const docs = (await getCollection('docs'))
+  .sort((a, b) => a.data.order - b.data.order);
+
+// Group docs by section
+const sections = new Map<string, typeof docs>();
+docs.forEach((doc) => {
+  const group = sections.get(doc.data.section) || [];
+  group.push(doc);
+  sections.set(doc.data.section, group);
+});
+---
+
+<BaseLayout seo={{ title: t('docs.title'), description: t('docs.description') }}>
+  <Section>
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">{t('docs.title')}</h1>
+      <p class="mt-2 text-[var(--color-text-light)] dark:text-[var(--color-text-light-dark)]">
+        {t('docs.description')}
+      </p>
+    </div>
+
+    <div class="space-y-12">
+      {Array.from(sections).map(([sectionName, sectionDocs]) => (
+        <div>
+          <h2 class="text-xl font-semibold mb-4">{sectionName}</h2>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {sectionDocs.map((doc) => (
+              <Card href={`/docs/${doc.slug}`}>
+                <h3 class="text-lg font-semibold">{doc.data.title}</h3>
+                <p class="mt-2 text-sm text-[var(--color-text-light)] dark:text-[var(--color-text-light-dark)]">
+                  {doc.data.description}
+                </p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </Section>
+</BaseLayout>

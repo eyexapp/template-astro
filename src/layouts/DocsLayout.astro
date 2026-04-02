@@ -1,0 +1,79 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { SeoMeta } from '@core/types';
+
+interface Props {
+  title: string;
+  description: string;
+  section: string;
+}
+
+const { title, description, section } = Astro.props;
+
+const seo: Partial<SeoMeta> = { title, description };
+
+const docsSections = [
+  {
+    title: 'Introduction',
+    items: [
+      { label: 'Getting Started', href: '/docs/getting-started' },
+    ],
+  },
+  {
+    title: 'Guides',
+    items: [
+      { label: 'Components', href: '/docs/components' },
+      { label: 'Deployment', href: '/docs/deployment' },
+    ],
+  },
+];
+---
+
+<BaseLayout seo={seo}>
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="lg:grid lg:grid-cols-[16rem_1fr] lg:gap-12">
+      <!-- Sidebar -->
+      <aside class="hidden lg:block">
+        <nav class="sticky top-24 space-y-6">
+          {docsSections.map((group) => (
+            <div>
+              <h4 class="text-sm font-semibold uppercase tracking-wider text-[var(--color-muted)]">
+                {group.title}
+              </h4>
+              <ul class="mt-2 space-y-1">
+                {group.items.map((item) => (
+                  <li>
+                    <a
+                      href={item.href}
+                      class:list={[
+                        'block rounded-md px-3 py-2 text-sm transition-colors',
+                        Astro.url.pathname.includes(item.href)
+                          ? 'bg-[var(--color-primary-50)] font-medium text-[var(--color-primary-700)]'
+                          : 'text-[var(--color-text-light)] hover:bg-[var(--color-surface-alt)] hover:text-[var(--color-text)]',
+                      ]}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+      </aside>
+
+      <!-- Content -->
+      <article class="min-w-0">
+        <div class="mb-8">
+          <p class="text-sm font-medium text-[var(--color-primary-600)]">{section}</p>
+          <h1 class="mt-2 text-3xl font-bold tracking-tight">{title}</h1>
+          <p class="mt-2 text-[var(--color-text-light)]">{description}</p>
+        </div>
+
+        <div class="prose">
+          <slot />
+        </div>
+      </article>
+    </div>
+  </div>
+</BaseLayout>

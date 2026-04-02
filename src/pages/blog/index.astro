@@ -1,0 +1,54 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Card from '@components/ui/Card.astro';
+import Badge from '@components/ui/Badge.astro';
+import Section from '@components/ui/Section.astro';
+import { getCollection } from 'astro:content';
+import { formatDate, readingTime } from '@lib/utils';
+import { getLocaleFromUrl, useTranslations } from '@i18n/index';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const posts = (await getCollection('blog'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout seo={{ title: t('blog.title'), description: t('blog.description') }}>
+  <Section>
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">{t('blog.title')}</h1>
+      <p class="mt-2 text-[var(--color-text-light)] dark:text-[var(--color-text-light-dark)]">
+        {t('blog.description')}
+      </p>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => (
+        <Card href={`/blog/${post.slug}`}>
+          <div class="flex flex-wrap gap-2 mb-3">
+            {post.data.tags.slice(0, 3).map((tag) => (
+              <Badge>{tag}</Badge>
+            ))}
+          </div>
+          <h2 class="text-lg font-semibold">{post.data.title}</h2>
+          <p class="mt-2 text-sm text-[var(--color-text-light)] line-clamp-3 dark:text-[var(--color-text-light-dark)]">
+            {post.data.description}
+          </p>
+          <div class="mt-4 flex items-center gap-3 text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {formatDate(post.data.pubDate)}
+            </time>
+            <span>·</span>
+            <span>{readingTime(post.body || '')}</span>
+          </div>
+        </Card>
+      ))}
+    </div>
+
+    {posts.length === 0 && (
+      <p class="text-center text-[var(--color-muted)]">No posts yet. Add markdown files to <code>src/content/blog/</code>.</p>
+    )}
+  </Section>
+</BaseLayout>

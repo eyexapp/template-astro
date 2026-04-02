@@ -1,0 +1,79 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Badge from '@components/ui/Badge.astro';
+import { formatDate, readingTime } from '@lib/utils';
+import type { SeoMeta } from '@core/types';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  author?: string;
+  tags?: string[];
+  image?: { src: string; alt: string };
+  body: string;
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  author = 'Anonymous',
+  tags = [],
+  image,
+  body,
+} = Astro.props;
+
+const seo: Partial<SeoMeta> = {
+  title,
+  description,
+  type: 'article',
+  image: image?.src,
+  publishedTime: pubDate.toISOString(),
+  modifiedTime: updatedDate?.toISOString(),
+  author,
+  tags,
+};
+---
+
+<BaseLayout seo={seo}>
+  <article class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <header class="mb-10">
+      <div class="flex flex-wrap items-center gap-2 text-sm text-[var(--color-muted)] mb-4">
+        <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+        <span>·</span>
+        <span>{readingTime(body)}</span>
+        <span>·</span>
+        <span>{author}</span>
+      </div>
+
+      <h1 class="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+        {title}
+      </h1>
+
+      <p class="mt-4 text-lg text-[var(--color-text-light)]">
+        {description}
+      </p>
+
+      {tags.length > 0 && (
+        <div class="mt-4 flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <Badge>{tag}</Badge>
+          ))}
+        </div>
+      )}
+
+      {updatedDate && (
+        <p class="mt-4 text-sm italic text-[var(--color-muted)]">
+          Last updated: {formatDate(updatedDate)}
+        </p>
+      )}
+    </header>
+
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,22 @@
+---
+import { cn } from '@lib/utils';
+
+interface Props {
+  variant?: 'default' | 'primary' | 'success' | 'warning' | 'danger';
+  class?: string;
+}
+
+const { variant = 'default', class: className } = Astro.props;
+
+const variants = {
+  default: 'bg-[var(--color-surface-alt)] text-[var(--color-text-light)] dark:bg-[var(--color-surface-alt-dark)] dark:text-[var(--color-text-light-dark)]',
+  primary: 'bg-[var(--color-primary-100)] text-[var(--color-primary-800)] dark:bg-[var(--color-primary-900)] dark:text-[var(--color-primary-200)]',
+  success: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200',
+  warning: 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200',
+  danger: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
+};
+---
+
+<span class={cn('inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium', variants[variant], className)}>
+  <slot />
+</span>

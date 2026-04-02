@@ -1,0 +1,50 @@
+---
+import '@styles/global.css';
+import Header from '@components/common/Header.astro';
+import Footer from '@components/common/Footer.astro';
+import SEOHead from '@components/common/SEOHead.astro';
+import type { SeoMeta } from '@core/types';
+import { siteConfig } from '@core/config/site.config';
+import { getLocaleFromUrl } from '@i18n/index';
+
+interface Props {
+  seo?: Partial<SeoMeta>;
+  class?: string;
+}
+
+const { seo = {}, class: className } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
+---
+
+<!doctype html>
+<html lang={locale} class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <SEOHead
+      title={seo.title}
+      description={seo.description || siteConfig.description}
+      image={seo.image}
+      canonicalUrl={seo.canonicalUrl}
+      type={seo.type}
+    />
+  </head>
+  <body class="min-h-screen flex flex-col bg-[var(--color-surface)] text-[var(--color-text)]">
+    <Header />
+    <main class:list={['flex-1', className]}>
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      import { initTheme } from '@stores/theme.store';
+      initTheme();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "name": "astro",
+  "displayName": "Astro",
+  "description": "Astro 5 Islands Architecture template with 5 UI frameworks, Content Collections, Nano Stores, Tailwind CSS 4, and i18n",
+  "category": "frontend",
+  "language": "typescript",
+  "framework": "astro",
+  "tags": ["astro", "islands", "content-collections", "multi-framework", "i18n", "dark-mode", "seo"],
+  "commands": {
+    "dev": "npm run dev",
+    "build": "npm run build",
+    "test": "npm run check",
+    "lint": "npm run lint"
+  },
+  "packageManager": "npm",
+  "ci": {
+    "workflowTemplate": "astro",
+    "runner": "ubuntu-latest",
+    "runtime": {
+      "name": "node",
+      "version": "20",
+      "setup": "actions/setup-node@v4",
+      "cache": "npm"
+    },
+    "services": {},
+    "steps": {
+      "install": "npm ci",
+      "build": "npm run build",
+      "test": "npm run check",
+      "lint": "npm run lint"
+    }
+  }
+}
